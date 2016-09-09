@@ -9,7 +9,7 @@ var initialize = function initialize(appInstance) {
     }
   };
 
-  let componentHelper = (args,options) {
+  let componentHelper = function (args,options) {
     let container = this.container || mainContainer;
     let componentName = args;
     let component = container.lookup('component:' + componentName);
