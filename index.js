@@ -10,9 +10,6 @@ var Funnel = require('broccoli-funnel');
 
 module.exports = {
   name: 'ember-cli-raw-handlebars',
-  baseDir: function() {
-    return __dirname;
-  },
   init: function() {
     checker.assertAbove(this, '2.4.3');
   },
