@@ -12,6 +12,8 @@ module.exports = {
   name: 'ember-cli-raw-handlebars',
   init: function() {
     checker.assertAbove(this, '2.4.3');
+
+    this._super.init && this._super.init.apply(this, arguments);
   },
   included: function(app) {
   },
