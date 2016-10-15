@@ -24,15 +24,26 @@ module.exports = {
 
     return [];
   },
+  rawTemplatesCommonPaths: function() {
+    var _path = this.app.options.rawTemplatesPath || path.join(this.app.trees.app._directoryPath, '../lib/common/app/raw-templates');
+
+    if (fs.existsSync(_path)) {
+      return [_path];
+    }
+
+    return [];
+  },
   treeForApp: function(tree) {
-    let rawTemplates = mergeTrees(this.rawTemplatesPaths());
+    let rawCommonTemplates = mergeTrees(this.rawTemplatesCommonPaths()),
+        rawTemplates = mergeTrees(this.rawTemplatesPaths());
+
+    rawCommonTemplates = new Funnel(rawCommonTemplates, { destDir: 'raw-templates' });
+    rawCommonTemplates = this.processRawTemplates(rawCommonTemplates);
 
     rawTemplates = new Funnel(rawTemplates, { destDir: 'raw-templates' });
     rawTemplates = this.processRawTemplates(rawTemplates);
 
-    let mergedTrees = mergeTrees([tree, rawTemplates])
-
-    return mergedTrees;
+    return mergeTrees([tree, rawCommonTemplates, rawTemplates]);
   },
   processRawTemplates: function(tree) {
     return new RawHandlebarsCompiler(tree);
