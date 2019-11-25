@@ -6,7 +6,7 @@ class TemplateCompiler extends Filter {
   constructor(inputTree) {
     super(inputTree);
     this.inputTree = inputTree;
-    this.extensions = ['hbs', 'hbsx', 'handlebars'];
+    this.extensions = ['hbs', 'hdbs', 'handlebars'];
     this.targetExtension = 'js';
   }
   registerPlugins() {}
